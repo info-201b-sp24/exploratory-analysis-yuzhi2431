@@ -1,19 +1,10 @@
 ---
-title: "Exploratory Analysis"
-output: html_document
+title: "Analysis of Aircraft Wildlife collision"
+author: "Xinyue Zhang, Yuzhi Fan"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
 ---
 
-## Project title
-
-**Analysis of Aircraft Wildlife collision**
-
-### Authors
-- Xinyue Zhang
-- Yuzhi Fan
-
-### Date
-
-Mar. 15, 2024
 ## Abstract
 
 Our main question is: How do various factors such as bird species, time of day, and weather conditions affect the likelihood of aircraft-wildlife collisions? This question is important because mitigating such collisions is crucial for aviation safety and wildlife conservation. To address the question, we will analyze a dataset containing information on aircraft-wildlife collisions, focusing on identifying patterns and risk factors.
@@ -24,10 +15,9 @@ Our main question is: How do various factors such as bird species, time of day, 
 - Birdstrike Analysis
 - Aircraft Wildlife Encounters
 - Aviation Safety
-
 ## Proposal
 
-### **1. Introduction**
+**1. Introduction**
 
 > Aircraft-wildlife collisions pose significant risks to aviation safety and wildlife populations. Our research aims to investigate the factors influencing these collisions, including bird species, time of day, and weather conditions, etc. Understanding these factors is crucial for developing effective strategies to reduce and prevent collisions as well as mitigate their impacts.
     Research Questions:
@@ -36,7 +26,7 @@ Our main question is: How do various factors such as bird species, time of day, 
     **3. How do weather conditions affect the probability of aircraft-wildlife collisions?**
 These questions are motivated by the need to enhance aviation safety, protect wildlife populations, and minimize economic losses associated with aircraft damage.
 
-### **2. Related Work**
+**2. Related Work**
 
 > From research by Silaeva, we found out that more than 90% of collisions occur at the airport or in its vicinity. (Silaeva) Also, their research claims that there are more collisions in takeoff than landing process. Another interesting claim mentioned in the research is that the largest number of bird strikes happen during spring and summer daylight hours, (Silaeva) which contradicts with the intuition that insufficient lighting should result in more collisions. Furthermore, Silaeva also analyzed data on aircraft collisions with birds of prey, highlighting that most incidents involve species like the Common Kestrel and Common Buzzard, and occur near airports during takeoff. (Silaeva) It provides insights into the timing and location of bird strikes, as well as typical aircraft damage, offering strategies for mitigating risks. This article is directly relevant to our project's focus on identifying factors influencing wildlife collisions with aircraft. In another related article by Pfeiffer, which focuses on evaluating the risk various bird species pose to military aircraft, the author highlights the correlation between bird size and the severity of damage to aircraft, emphasizing that larger birds are typically more hazardous. (Pfeiffer) This information is crucial for developing effective wildlife management plans at airfields, aiding both aviation safety and wildlife conservation. The fourth article by Avrenli have concluded six factors are significantly associated with the probability of engine failure in the event of a bird strike: altitude above ground level, bird size, number of birds struck, flight phase, daylight conditions, and sky conditions. (Avrenli)
 >Avrenli, Kivanc A., and Barry J. Dempsey. “Statistical Analysis of Aircraft–Bird Strikes Resulting in Engine Failure.” Transportation Research Record, vol. 2449, no. 1, 2014, pp. 14–23, https://doi.org/10.3141/2449-02.
@@ -44,69 +34,25 @@ Silaeva, O. L., et al. “Research on Aircraft Collisions with Birds According t
 Silaeva, O. L., and A. S. Pedenko. “Aircraft collisions with birds (orders Falconiformes and accipitriformes).” Biology Bulletin, vol. 50, no. 4, 15 Aug. 2023, pp. 656–665, https://doi.org/10.1134/s1062359023600861.
 Pfeiffer, Morgan B et al. “Quantification of avian hazards to military aircraft and implications for wildlife management.” PloS one vol. 13,11 e0206599. 1 Nov. 2018, doi:10.1371/journal.pone.0206599
 
-### **3. The Dataset**
+3. The Dataset
 
 
-| Source | The data is sourced from the OpenIntro project's dataset on bird strikes, which includes information on aircraft-wildlife collisions. |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Collection | The data was collected by aviation authorities and wildlife management agencies through incident reports and observations. |
-| Purpose | The purpose of the dataset is to understand the frequency, severity, and factors contributing to aircraft-wildlife collisions. |
-| Observations | The dataset comprises 19302 observations from 1990 to 1997 representing individual incidents of aircraft-wildlife collisions. |
-| Features | It includes a total of 17 features such as bird species, location, time of day, weather conditions, and aircraft information. |
-| Ethical Considerations | maintaining the privacy of individuals involved in incidents and ensuring that wildlife conservation efforts are not compromised. |
-| Limitations | lack of weather condition data, lack of aircraft registration data, underreporting of incidents, lack of standardized reporting protocols, and biases in data collection methods. |
+    | Source | The data is sourced from the OpenIntro project's dataset on bird strikes, which includes information on aircraft-wildlife collisions. |
+    | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+    | Collection | The data was collected by aviation authorities and wildlife management agencies through incident reports and observations. |
+    | Purpose | The purpose of the dataset is to understand the frequency, severity, and factors contributing to aircraft-wildlife collisions. |
+    | Observations | The dataset comprises 19302 observations from 1990 to 1997 representing individual incidents of aircraft-wildlife collisions. |
+    | Features | It includes a total of 17 features such as bird species, location, time of day, weather conditions, and aircraft information. |
+    | Ethical Considerations | maintaining the privacy of individuals involved in incidents and ensuring that wildlife conservation efforts are not compromised. |
+    | Limitations | lack of weather condition data, lack of aircraft registration data, underreporting of incidents, lack of standardized reporting protocols, and biases in data collection methods. |
 
 
-### **4. Implications**
+**4. Implications**
 
 > Recognize the factors and reasons that cause aircraft-wildlife collision can have a significant impact on aviation safety, wildlife conservation, and aircraft management. After knowing which factors have caused these collisions, engineers are able to design better collision avoidance systems, wildlife scientists can develop stragegies to protect wildlife near airport area, and policy makers can enfore better regulations to reduce collision risk systematically. 
 
-### **5. Limitations & Challenges**
+**5. Limitations & Challenges**
 >Challenges in this project may include data quality issues, such as incomplete or inconsistent reporting of incidents, missing values, and the complexity of analyzing interactions between multiple factors contributing to collisions. For example, the "birds_seen" and "birds_struck" columns contains relatively vague information suck as "2-10", "11-100" or "Over 100".
 
-
-
-
-### Summary Information
-
-```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("summary_info.R")}
-```
-
-We calculated several statistics from the dataset to have a better understanding about it. First, we found out that mean altitude of collision is `r summary_info$collision_mean_height` ft. this indicates that most collision happened during landing and takeoff period. Then, we calculated the median and max birds seen and struck reported by the pilot. We have used most conservative number form the dataset. For example, if the dataset indicates "11-100", we will use 11 as the number. These 4 statistics are in the table below. 
-
-|  | birds seen | birds struck |
-| --- | ---------- | ------------ |
-| median |`r summary_info$median_bird_seen`  |`r summary_info$median_bird_struck`  |
-| max |`r summary_info$max_bird_seen`  |`r summary_info$max_bird_struck`  |
-
-This have shown that for most of the time airplanes struck with **a small group of birds**, with the median birds seen and median birds struck to be 2 and 1 respectively. 
-
-
-### Table
-
-Include a table of aggregate information
-
-Describe why you included the table and what information it reveals
-
-### Chart 1
-
-Include a chart
-
-Describe why you chose this chart and what information it reveals
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("chart1_example.R")}
-```
-
-### Chart 2
-
-Include a chart
-
-Describe why you chose this chart and what information it reveals
-
-### Chart 3
-
-Include a chart
-
-Describe why you chose this chart and what information it reveals
+**Acknowledgements**
+> We would like to thank the OpenIntro project for providing access to the bird strikes dataset and all the aviation authorities and wildlife management agencies involved in collecting the data.
