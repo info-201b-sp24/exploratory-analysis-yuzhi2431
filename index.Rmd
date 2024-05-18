@@ -14,6 +14,7 @@ output: html_document
 ### Date
 
 Mar. 15, 2024
+
 ## Abstract
 
 Our main question is: How do various factors such as bird species, time of day, and weather conditions affect the likelihood of aircraft-wildlife collisions? This question is important because mitigating such collisions is crucial for aviation safety and wildlife conservation. To address the question, we will analyze a dataset containing information on aircraft-wildlife collisions, focusing on identifying patterns and risk factors.
@@ -31,8 +32,8 @@ Our main question is: How do various factors such as bird species, time of day, 
 
 > Aircraft-wildlife collisions pose significant risks to aviation safety and wildlife populations. Our research aims to investigate the factors influencing these collisions, including bird species, time of day, and weather conditions, etc. Understanding these factors is crucial for developing effective strategies to reduce and prevent collisions as well as mitigate their impacts.
     Research Questions:
-    **1. How do bird species characteristics influence the likelihood of aircraft-wildlife collisions?**
-    **2. What role does time of day play in the frequency and severity of aircraft-wildlife collisions?**
+    **1. What role does time of day play in the frequency and severity of aircraft-wildlife collisions?**
+    **2. How do bird species characteristics influence the likelihood of aircraft-wildlife collisions?**
     **3. How do weather conditions affect the probability of aircraft-wildlife collisions?**
 These questions are motivated by the need to enhance aviation safety, protect wildlife populations, and minimize economic losses associated with aircraft damage.
 
@@ -84,29 +85,30 @@ This have shown that for most of the time airplanes struck with **a small group 
 
 ### Table
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("summary_info.R")}
+```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("agg_tbl.R")}
+
 ```
-Describe why you included the table and what information it reveals
+
+Above is a table showing the top 10 bird species that have the highest number of bird strikes. It reveals that most collisions are caused by small birds. Apart from unknown birds, the top on the list is gulls and sparrows. Small birds typically cause less damage to the airplane, but  they are more likely to appear in large quantities. 
 
 ### Chart 1
-
-Include a chart
-
-Describe why you chose this chart and what information it reveals
-
-Here's an example of how to run an R script inside an RMarkdown file:
 
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("chart1.R")}
 ```
 
+This chart shows the distribution of collision heights at different times of day, addressing our first research question. We can see that the distribution of collision heights for dusk, day, and dawn are all close to zero, indicating that collisions mostly occur during take-off or landing at these times. When the plane is cruising at a high altitude, pilots can visually locate and avoid birds. In contrast, the distribution of heights for night collisions is much higher, indicating that at night, pilots have less ability to avoid collisions at higher altitudes.
+
 ### Chart 2
 
-Include a chart
+```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("chart2.R")}
+```
 
-Describe why you chose this chart and what information it reveals
+The bar chart above illustrates the outcomes of aircraft-wildlife collisions categorized by bird species. This visualization reveals significant differences in collision effects among the top bird species. For instance, species like "Blackbirds" and "Gulls" primarily show outcomes categorized as "None," suggesting these collisions often result in no significant aircraft damage. Conversely, species such as "European Starlings" and "Rock Pigeons" exhibit a notable number of "Precautionary Landing" incidents, indicating these collisions may pose greater risks to flight safety. The presence of various effects like "Engine Shut Down" in species like "Sparrows" highlights the potential severe impacts certain species can have on aircraft operations. This analysis underscores the importance of understanding species-specific behaviors and physical characteristics to mitigate risks and enhance aviation safety effectively.
 
 ### Chart 3
 
-Include a chart
+```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("chart3.R")}
+```
 
-Describe why you chose this chart and what information it reveals
+The bar chart provides a clear visualization of how different sky conditions influence the outcomes of aircraft-wildlife collisions. It reveals that certain sky conditions, such as "No Cloud" and "Overcast," are associated with higher frequencies of collisions, including serious outcomes like "Engine Shut Down" and "Precautionary Landing." These variations suggest that visibility and other weather-related factors significantly impact both the likelihood and severity of collisions. For instance, clearer skies might not always result in fewer incidents, potentially due to increased air traffic during favorable weather, while overcast conditions could lead to reduced visibility, increasing collision risks. This analysis underscores the importance of considering weather conditions in developing strategies to mitigate aircraft-wildlife collisions.
+
