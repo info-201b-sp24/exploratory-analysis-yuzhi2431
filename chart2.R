@@ -4,24 +4,32 @@ library(ggplot2)
 
 data(birds)
 
-# Summarize the data to find the top species
-top_species <- df_species_effect %>%
-  group_by(Species) %>%
-  summarise(Total = sum(Frequency)) %>%
-  top_n(10, Total) %>%
-  pull(Species)
+species_effect_counts <- birds %>%
+  group_by(species, effect) %>%
+  summarise(Count = n(), .groups = 'drop') 
 
-# Filter the main data frame for only top species
-df_top_species_effect <- df_species_effect %>%
-  filter(Species %in% top_species)
 
-# Plot
-ggplot(df_top_species_effect, aes(x = Species, y = Frequency, fill = Effect)) +
-  geom_bar(stat = "identity", position = "fill") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "Top Bird Species and Collision Effects",
+top_species <- species_effect_counts %>%
+  group_by(species) %>%
+  summarise(Total = sum(Count)) %>%
+  top_n(10, Total) %>%  
+  pull(species)
+
+filtered_data <- species_effect_counts %>%
+  filter(species %in% top_species)
+
+# Create the bar chart
+ggplot(filtered_data, aes(x = species, y = Count, fill = effect)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Impact of Top Bird Species on Collision Effects",
        x = "Species",
-       y = "Proportion")
+       y = "Number of Collisions",
+       fill = "Collision Effect") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 65, vjust = 0.6),  
+        plot.margin = unit(c(1,1,1,1), "cm")) 
+ggsave("Top_Species_Collision_Effects.png", width = 12, height = 8)
+
 
 
 
