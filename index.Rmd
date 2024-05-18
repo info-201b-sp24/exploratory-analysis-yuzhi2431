@@ -84,8 +84,8 @@ This have shown that for most of the time airplanes struck with **a small group 
 
 ### Table
 
-Include a table of aggregate information
-
+```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("summary_info.R")}
+```
 Describe why you included the table and what information it reveals
 
 ### Chart 1
@@ -96,7 +96,7 @@ Describe why you chose this chart and what information it reveals
 
 Here's an example of how to run an R script inside an RMarkdown file:
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("chart1_example.R")}
+```{r, message = FALSE, warning = FALSE, echo = FALSE, code = readLines("chart1.R")}
 ```
 
 ### Chart 2
